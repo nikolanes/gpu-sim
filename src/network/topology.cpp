@@ -43,6 +43,12 @@ unique_ptr<Topology> make_fat_tree(int k, const LinkConfig& config) {
         throw invalid_argument("Invalid fat tree size");
     }
 
+    /*
+    k pods -> each pod has k/2 aggr switches
+    each aggr switch is connected to a specific group of
+    core switches based on its index in the pod
+    */
+    
     auto t = make_unique<Topology>();
     const int half = k/2;
     vector<NodeId> core_nodes(half * half);
