@@ -36,19 +36,8 @@ struct QueuePair {
     deque<ReceiveRequest> rq;
     optional<SendRequest> active_send;
     optional<ReceiveRequest> active_recv;
-
-    uint64_t next_offset = 0, acked_bytes = 0;
+    
     uint64_t recv_total = 0, recv_written = 0;
-    optional<FlowId> recv_flow;
-
-    uint64_t base = 0, next_seq = 0;
-    uint64_t expected = 0, committed = 0;
-    deque<PacketId> unacked;
-
-    bool recovering = false, read_pending = false;
-    uint64_t retry_seq = 0, retry_end = 0;
-    uint32_t retries = 0;
-    uint64_t timer_generation = 0, tx_generation = 0;
 };
 
 class RdmaEndpoint {
